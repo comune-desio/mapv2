@@ -1,0 +1,137 @@
+﻿<!DOCTYPE html>
+
+<html data-ng-app="angularApplication">
+<head>
+<title>Mappa Desio</title>
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.2.0/sandstone/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+<link href="angular.panels.min.css" rel="stylesheet" type="text/css">
+
+<script src="https://maps.google.com/maps/api/js?libraries=placeses,visualization,drawing,geometry,places&key=AIzaSyDqrDjL6eFlE2Nho-BZ1ZYmfAxMAAgGrSo"></script>
+<script src="https://code.angularjs.org/1.3.15/angular.min.js"></script>
+<script src="ng-map.min.js"></script>
+<script src="angular.panels.min.js"></script>
+<style>
+  ng-map {
+  position:absolute;
+  width: 100%;
+  height: 100%;
+}
+.modal {
+  display: block;
+  z-index: -1;
+}
+.modal.fade.in {
+  z-index: 1050;
+}
+</style>
+</head>
+
+<body data-ng-controller="defaultController">
+  <ng-map   map-type-control="false" default-style="false" zoom="14" center="45.618600, 9.207690" >
+	<marker position="current" animation="Animation.BOUNCE" title="Tua posizione" icon="{url:'man.png'}"></marker>
+    <div ng-repeat="cat in pois" ng-if="cat.Visible===true">
+	<div ng-repeat="c in cat.Categories">
+    <marker ng-repeat="p in c.Locations" 
+      position="{{p.Latitude}},{{p.Longitude}}" title="{{p.Address}}"  id="POI_{{$index}}"  on-click="leftOpen(event,p,c)"
+      icon="{
+        url:'{{c.Icon}}'
+      }"
+      
+      >
+    </marker>
+	</div>
+	</div>
+	<custom-control id="title" position="TOP_LEFT" index="1">
+	<div style="padding: 10px;">
+	<h3><b>Città di Desio</b></h3>
+	<p>Punti di interesse</p>
+	<div ng-repeat="d in pois"  style="padding: 5px;background-color: white;">
+	<label >
+	<input 
+	type="checkbox"
+	name="DS_{{$index}}"
+	ng-model="d.Visible"
+	>{{d.Dataset}}
+	</label>	
+	</div>
+	</div>
+	</custom-control>    
+	<custom-control id="by" position="BOTTOM_LEFT" index="1">
+		<div style="padding: 10px;"></div>
+	</custom-control> 
+	<custom-control id="by" position="TOP_RIGHT" index="1">
+	<div ng-repeat="cat in pois" ng-if="cat.Visible===true">
+		<div ng-repeat="c in cat.Categories" style="padding: 5px;background-color: white;"><img ng-src="{{c.Icon}}" style="width:16px;height:16px">{{c.Category}}</div>
+	</div>
+	</custom-control> 	
+  </ng-map>
+
+	<div data-panels="true"></div>
+
+	<script>
+
+		var app = angular.module('angularApplication', ['angular.panels','ngMap']);
+
+		//add panels
+		app.config(['panelsProvider','$windowProvider', function (panelsProvider,$windowProvider) {
+		var $window = $windowProvider.$get();
+		var sizePanel="";
+		if ($window.innerWidth<400) {
+			sizePanel="80%"
+		}
+		else
+		{
+			sizePanel="400px"
+		}
+		
+			panelsProvider
+		        .add({
+		            id: 'panel',
+		            position: 'left',
+		            size:sizePanel,
+		            templateUrl: 'panel.html',
+		            controller: 'leftCtrl'
+		        })
+		        ;
+		}]);
+
+		//default controller
+		app.controller('defaultController', ['$scope', 'panels','NgMap','$http','$window', function ($scope, panels,NgMap,$http,$window) {
+
+		NgMap.getMap().then(function(map) {
+			$scope.map = map;
+		});
+$http.get("poi.json")
+    .then(function(response) {
+        $scope.pois = response.data;
+    });	
+
+  $scope.showPOI = function(event, poi) {
+    $scope.selectedPOI = poi;
+	panels.open("panel");
+    //$scope.map.showInfoWindow('myInfoWindow', this);
+  };		
+		
+			$scope.leftOpen = function (event,poi,cat) {
+				$scope.$broadcast('leftHello',poi,cat);
+			};
+		}]);
+
+		//left panel controller
+		app.controller('leftCtrl', ['$scope', 'panels', function ($scope, panels) {
+
+			$scope.$on('leftHello', function(event, poi,cat) {
+				$scope.selectedPOI = poi;
+				$scope.selectedCAT = cat;
+				panels.open("panel");
+			});
+	
+		}]);
+
+
+
+	</script>
+</body>
+</html>
