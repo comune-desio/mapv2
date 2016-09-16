@@ -1,0 +1,63 @@
+<script>
+
+  var app = angular.module('angularApplication', ['angular.panels','ngMap']);
+
+  //add panels
+  app.config(['panelsProvider','$windowProvider', function (panelsProvider,$windowProvider) {
+  var $window = $windowProvider.$get();
+  var sizePanel="";
+  if ($window.innerWidth<400) {
+    sizePanel="80%"
+  }
+  else
+  {
+    sizePanel="400px"
+  }
+
+    panelsProvider
+          .add({
+              id: 'panel',
+              position: 'left',
+              size:sizePanel,
+              templateUrl: 'panel.html',
+              controller: 'leftCtrl'
+          })
+          ;
+  }]);
+
+  //default controller
+  app.controller('defaultController', ['$scope', 'panels','NgMap','$http','$window', function ($scope, panels,NgMap,$http,$window) {
+
+  NgMap.getMap().then(function(map) {
+    $scope.map = map;
+  });
+$http.get("data/poi.json")
+  .then(function(response) {
+      $scope.pois = response.data;
+  });
+
+$scope.showPOI = function(event, poi) {
+  $scope.selectedPOI = poi;
+panels.open("panel");
+  //$scope.map.showInfoWindow('myInfoWindow', this);
+};
+
+    $scope.leftOpen = function (event,poi,cat) {
+      $scope.$broadcast('leftHello',poi,cat);
+    };
+  }]);
+
+  //left panel controller
+  app.controller('leftCtrl', ['$scope', 'panels', function ($scope, panels) {
+
+    $scope.$on('leftHello', function(event, poi,cat) {
+      $scope.selectedPOI = poi;
+      $scope.selectedCAT = cat;
+      panels.open("panel");
+    });
+
+  }]);
+
+
+
+</script>

@@ -1,0 +1,99 @@
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.42857143;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  line-height: 1rem;
+  padding: 1rem;
+  font-size: 14px;
+  border-bottom: 2px solid #ccc;
+}
+.header h1 {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+  margin-right: 1rem;
+}
+.header a {
+  font-size: 1rem;
+  line-height: 1.2rem;
+  display: flex;
+  align-items: center;
+}
+.header a img {
+  margin-left: 1rem;
+}
+
+
+.map-viewer {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: row;
+
+  justify-content: flex-start; /* align items in Main Axis */
+  align-items: stretch; /* align items in Cross Axis */
+  align-content: stretch; /* Extra space in Cross Axis */
+}
+
+.map-viewer .map,
+.map-viewer .categories-picker {
+}
+
+.map-viewer .map { width: 50%; }
+.categories-results { width: 50%;}
+
+.map-viewer .map {
+  border-right: 2px solid #ccc;
+}
+
+.map-viewer .categories-picker {
+  padding: 1rem;
+  border-bottom: 2px solid #ccc;
+}
+
+.categories-picker > div {
+  margin-bottom: 0.5rem;
+}
+
+.categories-picker input[type=checkbox] {
+
+}
+
+.categories-picker label {
+
+}
+
+.map-viewer .results {
+  padding: 0;
+  list-style-type: none;
+}
+
+.map-viewer .results li {
+  border-bottom: 1px solid #ccc;
+  padding: 1rem;
+}
+
+.map-viewer .results li:first-child {
+  padding-top: 0;
+}
+
+.map-viewer .results li:last-child {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.categories-results {
+  overflow-y: scroll;
+  height: 100%;
+}

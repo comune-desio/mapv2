@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+
+<html data-ng-app="angularApplication">
+  <head>
+    <%= partial "partials/head" %>
+  </head>
+
+  <body data-ng-controller="defaultController">
+    <%= yield %>
+    <%= partial "partials/footer" %>
+  </body>
+</html>
