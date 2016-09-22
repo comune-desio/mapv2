@@ -15,7 +15,6 @@ class CustomBuild < Middleman::Extension
     owner = "comune-desio"
     repo = "map"
     path = "source/data/poi--build.json"
-    data = JSON.parse(File.read(path))
     data = @dato.datasets.map do |dataset|
       {
         "Dataset" => dataset.name,
@@ -27,17 +26,17 @@ class CustomBuild < Middleman::Extension
             "Locations" => category.locations.map do |location|
               {
                 "Address" => location.address,
-                "Latitude" => location.latitude,
-                "Longitude" => location.longitude,
-                "Note" => location.note,
-                "Link" => location.url
+                "Latitude" => location.latitude.to_f,
+                "Longitude" => location.longitude.to_f,
+                "Note" => location.note || "",
+                "Link" => location.url || ""
               }
             end
           }
         end
       }
     end
-    client.update_file(owner: owner, repo: repo, branch: "master", path: path, message: "Updating file #{path}", content: JSON.pretty_generate(data))
+    client.update_file(owner: owner, repo: repo, branch: "master", path: path, message: "Builds dataset #{path} from DatoCMS", content: JSON.pretty_generate(data))
   end
 end
 
