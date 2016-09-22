@@ -14,3 +14,5 @@ configure :build do
   activate :minify_javascript
   activate :custom_build, dato: dato
 end
+
+config[:poi_url] = "https://raw.githubusercontent.com/comune-desio/opendata/master/poi--build.json"

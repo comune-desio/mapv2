@@ -31,7 +31,7 @@
   NgMap.getMap().then(function(map) {
     $scope.map = map;
   });
-$http.get("data/poi.json")
+$http.get("<%= config[:poi_url] %>")
   .then(function(response) {
       $scope.pois = response.data;
   });
