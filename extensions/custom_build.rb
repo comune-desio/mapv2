@@ -36,7 +36,7 @@ class CustomBuild < Middleman::Extension
         end
       }
     end
-    client.update_file(owner: owner, repo: repo, branch: "master", path: path, message: "Builds dataset #{path} from DatoCMS", content: JSON.pretty_generate(data))
+    # client.update_file(owner: owner, repo: repo, branch: "master", path: path, message: "Builds dataset #{path} from DatoCMS", content: JSON.pretty_generate(data))
   end
 end
 
