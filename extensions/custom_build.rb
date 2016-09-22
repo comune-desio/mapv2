@@ -30,7 +30,7 @@ class CustomBuild < Middleman::Extension
                 "Latitude" => location.latitude,
                 "Longitude" => location.longitude,
                 "Note" => location.note,
-                "Link" => location.link
+                "Link" => location.url
               }
             end
           }
