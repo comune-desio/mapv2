@@ -1,4 +1,5 @@
 require "yajl"
+require_relative "extensions/custom_build"
 
 configure :development do
   activate :livereload
@@ -11,4 +12,5 @@ activate :dato,
 configure :build do
   activate :minify_css
   activate :minify_javascript
+  activate :custom_build, dato: dato
 end
