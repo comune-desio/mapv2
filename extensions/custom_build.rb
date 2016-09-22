@@ -13,8 +13,8 @@ class CustomBuild < Middleman::Extension
   def after_build(builder)
     client = GitWand::GitHub::API::Client.new(username: ENV["GITHUB_USERNAME"], token: ENV["GITHUB_TOKEN"])
     owner = "comune-desio"
-    repo = "map"
-    path = "source/data/poi--build.json"
+    repo = "opendata"
+    path = "poi--build.json"
     data = @dato.datasets.map do |dataset|
       {
         "Dataset" => dataset.name,
@@ -36,7 +36,7 @@ class CustomBuild < Middleman::Extension
         end
       }
     end
-    # client.update_file(owner: owner, repo: repo, branch: "master", path: path, message: "Builds dataset #{path} from DatoCMS", content: JSON.pretty_generate(data))
+    client.update_file(owner: owner, repo: repo, branch: "master", path: path, message: "Builds dataset #{path} from DatoCMS", content: JSON.pretty_generate(data))
   end
 end
 
