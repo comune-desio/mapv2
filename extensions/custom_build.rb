@@ -22,6 +22,7 @@ class CustomBuild < Middleman::Extension
         "Categories" => dataset.categories.map do |category|
           {
             "Category" => category.name,
+            "Visible" => !category.hidden,
             "Icon" => "#{category.icon.name}.png",
             "Locations" => category.locations.map do |location|
               {
