@@ -9,10 +9,10 @@
         "Locations": [
           {
             "Address": "Via Fratelli Cervi 6",
-            "Latitude": "45.618486",
-            "Longitude": "9.206961",
-            "Note": null,
-            "Link": null
+            "Latitude": 45.618486,
+            "Longitude": 9.206961,
+            "Note": "",
+            "Link": ""
           }
         ]
       },
@@ -22,10 +22,10 @@
         "Locations": [
           {
             "Address": "Via Stazione",
-            "Latitude": "45.619598",
-            "Longitude": "9.21671",
-            "Note": null,
-            "Link": null
+            "Latitude": 45.619598,
+            "Longitude": 9.21671,
+            "Note": "",
+            "Link": ""
           }
         ]
       },
@@ -35,10 +35,10 @@
         "Locations": [
           {
             "Address": "Don Giussani",
-            "Latitude": "45.621237",
-            "Longitude": "9.209033",
-            "Note": null,
-            "Link": null
+            "Latitude": 45.621237,
+            "Longitude": 9.209033,
+            "Note": "",
+            "Link": ""
           }
         ]
       }
@@ -54,17 +54,17 @@
         "Locations": [
           {
             "Address": "Parco Desio",
-            "Latitude": "45.615232",
-            "Longitude": "9.215334",
-            "Note": null,
-            "Link": null
+            "Latitude": 45.615232,
+            "Longitude": 9.215334,
+            "Note": "",
+            "Link": ""
           },
           {
             "Address": "Parco Poste",
-            "Latitude": "45.621542",
-            "Longitude": "9.205994",
-            "Note": null,
-            "Link": null
+            "Latitude": 45.621542,
+            "Longitude": 9.205994,
+            "Note": "",
+            "Link": ""
           }
         ]
       },
@@ -74,10 +74,10 @@
         "Locations": [
           {
             "Address": "Parco cani  - Zona Esselunga",
-            "Latitude": "45.604257",
-            "Longitude": "9.202799",
-            "Note": null,
-            "Link": null
+            "Latitude": 45.604257,
+            "Longitude": 9.202799,
+            "Note": "",
+            "Link": ""
           }
         ]
       }
