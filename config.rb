@@ -1,5 +1,5 @@
 require "yajl"
-require_relative "extensions/custom_build"
+require "./extensions/custom_build"
 
 configure :development do
   activate :livereload
